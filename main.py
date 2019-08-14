@@ -91,23 +91,23 @@ def main():
 
         
             if float(pre[0][7]) >= worry_threshold:
-                cv2.putText(frame, emotion_dict[7], (x+20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
-                #emotion_list[7] += 1
+                #cv2.putText(frame, emotion_dict[7], (x+20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
+                emotion_list[7] += 1
             # show fear but is worry
             elif maxindex==2 and float(pre[0][7]) >= 0.0050:
-                cv2.putText(frame, emotion_dict[7], (x+20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
-                #emotion_list[7] += 1
+                #cv2.putText(frame, emotion_dict[7], (x+20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
+                emotion_list[7] += 1
             else:
-                cv2.putText(frame, emotion_dict[maxindex], (x+20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
-                #emotion_list[maxindex] += 1
+                #cv2.putText(frame, emotion_dict[maxindex], (x+20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
+                emotion_list[maxindex] += 1
             
-            # index = np.argmax(emotion_list)
-            # if emotion_list[index] >= buffer_size:
-            #     emotion_list=[0] * len(emotion_dict)
-            #     prev_emotion = emotion_dict[index]
-            #     cv2.putText(frame, emotion_dict[index], (x+20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
-            # else:
-            #     cv2.putText(frame, prev_emotion, (x+20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
+            index = np.argmax(emotion_list)
+            if emotion_list[index] >= buffer_size:
+                emotion_list=[0] * len(emotion_dict)
+                prev_emotion = emotion_dict[index]
+                cv2.putText(frame, emotion_dict[index], (x+20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
+            else:
+                cv2.putText(frame, prev_emotion, (x+20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
 
         cv2.imshow('Video', cv2.resize(frame,(800,600), interpolation = cv2.INTER_CUBIC))
         if cv2.waitKey(1) & 0xFF == ord('q'):
